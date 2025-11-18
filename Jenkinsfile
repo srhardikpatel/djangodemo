@@ -27,7 +27,7 @@ pipeline {
 
         stage('Update deployment file') {
             steps {
-                 withCredentials([string(credentialId: 'github', variable: 'GITHUB_TOKEN')]) {
+                 withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
                      sh '''
                          sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" deployment/deployment.yml
                         '''
