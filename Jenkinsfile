@@ -39,7 +39,7 @@ pipeline {
                         git add deployment/deployment.yml
                         git commit -m "Update deployment image to version ${BUILD_NUMBER}"
                         def encodedPassword = URLEncoder.encode("$GIT_PASSWORD",'UTF-8')
-                        git push https://${GIT_USERNAME}:${encodedPassword}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
+                        git push origin main
                         '''
                  }
             }
