@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: djangoexample-deployment
+  labels:
+    app: djangoexam
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: djangoexample
+  template:
+    metadata:
+      labels:
+        app: djangoexample
+    spec:
+      containers:
+      - name: djangoex
+        image: erhardikfreelancer/djangoexample:01
+        ports:
+        - containerPort: 8000
