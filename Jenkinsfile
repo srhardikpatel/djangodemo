@@ -26,9 +26,21 @@ pipeline {
         }
 
         stage('Update deployment file') {
+            
+            environment {
+                GIT_REPO_NAME = "djangodemo"
+                GIT_USER_NAME = "srhardikpatel"
+            }
+            
             steps {
                  withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
-                     sh 'sed  s/replaceImageTag/${BUILD_NUMBER}/g deployment/deployment.yml'
+                     sh '''
+                        sed  s/replaceImageTag/${BUILD_NUMBER}/g deployment/deployment.yml
+                        git add deployment/deployment.yml
+                        git commit -m "Update deployment image to version ${BUILD_NUMBER}"
+                        git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
+                        
+                        '''
                  }
             }
         }
