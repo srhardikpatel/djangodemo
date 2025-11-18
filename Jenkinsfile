@@ -33,12 +33,13 @@ pipeline {
             }
             
             steps {
-                 withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
+                 withCredentials([usernamePassword(credentialsId: 'github', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GITHUB_PASSWORD')]) {
                      sh '''
                         sed  s/replaceImageTag/${BUILD_NUMBER}/g deployment/deployment.yml
                         git add deployment/deployment.yml
                         git commit -m "Update deployment image to version ${BUILD_NUMBER}"
-                        git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
+                        def encodedPassword = URLEncoder.encode("$GIT_PASSWORD",'UTF-8')
+                        git push https://${GIT_USERNAME}:${encodedPassword}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
                         '''
                  }
             }
