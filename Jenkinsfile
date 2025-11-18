@@ -29,7 +29,7 @@ pipeline {
             steps {
                  withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
                      sh '''
-                         sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" deployment/deployment.yml
+                         sed -i "s/replaceImageTag/${BUILD_NUMBER}" deployment/deployment.yml
                         '''
                  }
             }
