@@ -35,9 +35,13 @@ pipeline {
             steps {
                  withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
                      sh '''
-                         echo "Current directory: $(pwd)"
-                         git --version
-                         
+                        git config user.email "srhardikpatel@gmail.com"
+                        git config user.name "srhardikpatel"
+
+                        git checkout main || git checkout -b main
+                        git fetch origin
+                        git reset --hard origin/main
+                        
                         '''
                  }
             }
