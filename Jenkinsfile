@@ -33,7 +33,7 @@ pipeline {
             }
             
             steps {
-                 withCredentials([usernamePassword(credentialsId: 'github', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GITHUB_PASSWORD')]) {
+                 withCredentials([usernamePassword(credentialsId: 'github', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
                      sh '''
                         sed  s/replaceImageTag/${BUILD_NUMBER}/g deployment/deployment.yml
                         git add deployment/deployment.yml
