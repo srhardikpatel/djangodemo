@@ -46,7 +46,7 @@ pipeline {
                         DEPLOY_FILE="$(pwd)/deployment/deployment.yml"
                         echo "Current directory: $(pwd)/$DEPLOY_FILE"
                         echo "Updating $DEPLOY_FILE with BUILD_NUMBER=${BUILD_NUMBER}"
-                        sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" $DEPLOY_FILE
+                        sed "s/replaceImageTag/${BUILD_NUMBER}/g" $DEPLOY_FILE
 
                         # Commit & push only if changes exist
                         git add $DEPLOY_FILE
