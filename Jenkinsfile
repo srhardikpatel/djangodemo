@@ -7,7 +7,7 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/srhardikpatel/djangodemo.git'    
             }
         }
-        
+/*        
         stage('build') {
             steps {
                sh 'docker build -t erhardikfreelancer/djangodemo:${BUILD_NUMBER} .'
@@ -24,7 +24,7 @@ pipeline {
                 }
             }
         }
-
+*/
         stage('Update deployment file') {
         
             environment {
