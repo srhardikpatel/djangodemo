@@ -37,9 +37,8 @@ pipeline {
                      sh '''
                         git config user.email "srhardikpatel@gmail.com"
                         git config user.name "srhardikpatel"
-                        BUILD_NUMBER=${BUILD_NUMBER}
                         DEPLOY_FILE="deployment/deployment.yml"
-                        sed -i '' 's/replaceImageTag/$BUILD_NUMBER/g' $DEPLOY_FILE
+                        sed -i '' "s/replaceImageTag/${BUILD_NUMBER}/g" $DEPLOY_FILE
                         git add $DEPLOY_FILE
                         git commit -m "Update deployment image to version ${BUILD_NUMBER}"
                         git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}.git HEAD:main
