@@ -37,11 +37,8 @@ pipeline {
                      sh '''
                         git config user.email "srhardikpatel@gmail.com"
                         git config user.name "srhardikpatel"
-
-                        git checkout main || git checkout -b main
-                        git fetch origin
-                        git reset --hard origin/main
-                        DEPLOY_FILE=$(pwd)/deployment/deployment.yml
+                        BUILD_NUMBER=${BUILD_NUMBER}
+                        DEPLOY_FILE=$deployment/deployment.yml
                         sed -i '' 's/replaceImageTag/${BUILD_NUMBER}/g' $DEPLOY_FILE
                         git add $DEPLOY_FILE
                         git commit -m "Update deployment image to version ${BUILD_NUMBER}"
