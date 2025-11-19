@@ -42,11 +42,27 @@ pipeline {
                         git fetch origin
                         git reset --hard origin/main
 
+                        BUILD_NUMBER=${BUILD_NUMBER}
+                        DEPLOY_FILE="deployment/deployment.yml"
+                        echo "Current directory: $(pwd)/$DEPLOY_FILE"
+                        echo "Updating $DEPLOY_FILE with BUILD_NUMBER=${BUILD_NUMBER}"
+                        sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" $DEPLOY_FILE
+
+                        # Commit & push only if changes exist
+                        git add $DEPLOY_FILE
+                        if ! git diff --cached --quiet; then
+                            git commit -m "Update deployment image to version ${BUILD_NUMBER}"
+                            git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}.git HEAD:main --quiet
+                            echo "Deployment file updated and pushed."
+                        else
+                            echo "No changes to commit."
+                        fi
+/*                            
                         sed  s/replaceImageTag/${BUILD_NUMBER}/g deployment/deployment.yml
                         git add deployment/deployment.yml
                         git commit -m "Update deployment image to version ${BUILD_NUMBER}"
                         git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
-                        
+ */                       
                         '''
                  }
             }
