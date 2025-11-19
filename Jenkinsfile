@@ -43,10 +43,10 @@ pipeline {
                         git reset --hard origin/main
 
                         BUILD_NUMBER=${BUILD_NUMBER}
-                        DEPLOY_FILE="$(pwd)/deployment/deployment.yml"
+                        DEPLOY_FILE="deployment/deployment.yml"
                         echo "Current directory: $(pwd)/$DEPLOY_FILE"
                         echo "Updating $DEPLOY_FILE with BUILD_NUMBER=${BUILD_NUMBER}"
-                        sed "s/replaceImageTag/${BUILD_NUMBER}/g" $DEPLOY_FILE
+                        sed -i '' 's/replaceImageTag/${BUILD_NUMBER}/g' $DEPLOY_FILE
 
                         # Commit & push only if changes exist
                         git add $DEPLOY_FILE
