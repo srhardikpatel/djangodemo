@@ -34,8 +34,11 @@ pipeline {
             
             steps {
                  withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
-                     echo "Current directory: $(pwd)"
-                     git --version
+                     sh '''
+                         echo "Current directory: $(pwd)"
+                         git --version
+                         
+                        '''
                  }
             }
         }
