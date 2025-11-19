@@ -34,7 +34,7 @@ pipeline {
             
             steps {
                  withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
-                     TAG_TO_REPLACE= sh 'awk /djangodemo:/{print $2} deployment/deployment.yml'
+                     def TAG_TO_REPLACE= sh 'awk /djangodemo:/{print $2} deployment/deployment.yml'
                      sh '''
                         git config user.email "srhardikpatel@gmail.com"
                         git config user.name "srhardikpatel"
