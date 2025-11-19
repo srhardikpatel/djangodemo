@@ -38,7 +38,7 @@ pipeline {
                         git config user.email "srhardikpatel@gmail.com"
                         git config user.name "srhardikpatel"
                         TAG_TO_REPLACE="awk '/SEARCH_TERM/{print $2}' deployment/deployment.yml"
-                        echo $(TAG_TO_REPLACE)
+                        echo ${TAG_TO_REPLACE}
                         sed -i '' "s/replaceImageTag/${BUILD_NUMBER}/g" deployment/deployment.yml
                         git add deployment/deployment.yml
                         git commit -m "Update deployment image to version ${BUILD_NUMBER}"
