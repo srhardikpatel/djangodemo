@@ -41,9 +41,9 @@ pipeline {
                         git checkout main || git checkout -b main
                         git fetch origin
                         git reset --hard origin/main
-                            
-                        sed -i '' 's/replaceImageTag/${BUILD_NUMBER}/g' deployment/deployment.yml
-                        git add deployment/deployment.yml
+                        DEPLOY_FILE=$(pwd)/deployment/deployment.yml
+                        sed -i '' 's/replaceImageTag/${BUILD_NUMBER}/g' $DEPLOY_FILE
+                        git add $DEPLOY_FILE
                         git commit -m "Update deployment image to version ${BUILD_NUMBER}"
                         git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}.git HEAD:main
 
