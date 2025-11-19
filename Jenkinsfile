@@ -36,10 +36,12 @@ pipeline {
                  withCredentials([usernamePassword(credentialsId: 'github', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
                      sh '''
                         sed  s/replaceImageTag/${BUILD_NUMBER}/g deployment/deployment.yml
+                        git config user.email srhardikpatel@gmail.com
+                        git config user.name srhardikpatel
                         git add deployment/deployment.yml
                         git commit -m "Update deployment image to version ${BUILD_NUMBER}"
                         def encodedPassword = URLEncoder.encode("$GIT_PASSWORD",'UTF-8')
-                        git push origin main
+                        git push https://${GIT_USERNAME}:${encodedPassword}@github.com/${GIT_USERNAME}/djangodemo.git"
                         '''
                  }
             }
