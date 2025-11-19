@@ -37,7 +37,7 @@ pipeline {
                      sh '''
                         git config user.email "srhardikpatel@gmail.com"
                         git config user.name "srhardikpatel"
-                        awk /djangodemo:/{print $2} deployment/deployment.yml
+                        awk '/djangodemo:/{print $2} deployment/deployment.yml'
                         
 /*                        sed -i '' "s/replaceImageTag/${BUILD_NUMBER}/g" deployment/deployment.yml
                         git add deployment/deployment.yml
