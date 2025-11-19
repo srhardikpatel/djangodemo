@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: djangoex
-        image: erhardikfreelancer/djangodemo:replaceImageTag
+        image: erhardikfreelancer/djangodemo:104
         ports:
         - containerPort: 8000
