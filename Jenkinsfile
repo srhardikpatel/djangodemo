@@ -32,7 +32,7 @@ pipeline {
             steps {
                 sh 'echo "Service user is $SERVICE_CREDS_USR"'
                 sh 'echo "Service password is $SERVICE_CREDS_PSW"'
-                sh 'curl -u $SERVICE_CREDS https://$SERVICE_CREDS_USR:$SERVICE_CREDS_PSW@github.com/$SERVICE_CREDS_USR/djangodemo.git'
+                sh 'curl -u $SERVICE_CREDS https://${GITHUB_TOKEN}@github.com/$SERVICE_CREDS_USR/djangodemo'
             }
         
 /*            environment {
