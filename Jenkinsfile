@@ -33,7 +33,8 @@ pipeline {
             }
             
             steps {
-                sh 'awk \'/djangodemo:/{print $2} deployment/deployment.yml\''
+                sh '''
+                  awk \'/djangodemo:/{print $2} deployment/deployment.yml\'
 /*                
                  withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
                      sh '''
