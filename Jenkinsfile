@@ -7,7 +7,7 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/srhardikpatel/djangodemo.git'    
             }
         }
-/*        
+        
         stage('build') {
             steps {
                sh 'docker build -t erhardikfreelancer/djangodemo:${BUILD_NUMBER} .'
@@ -24,7 +24,7 @@ pipeline {
                 }
             }
         }
-*/
+
         stage('Update deployment file') {
         
             environment {
@@ -33,25 +33,19 @@ pipeline {
             }
             
             steps {
-                  sh '''
-                  IMAGE_TAG=$(grep "djangodemo:" deployment/deployment.yml | awk '{print \$2}' | cut -d ":" -f 2)
-                  echo ${IMAGE_TAG}
-                     '''
-                              // | awk '{print \$2}' | cut -d ":" -f 2'
-/*                
                  withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
                      sh '''
                         git config user.email "srhardikpatel@gmail.com"
                         git config user.name "srhardikpatel"
+                        IMAGE_TAG=$(grep "djangodemo:" deployment/deployment.yml | awk '{print \$2}' | cut -d ":" -f 2)                        
                         
-                        
-                        sed -i '' "s/replaceImageTag/${BUILD_NUMBER}/g" deployment/deployment.yml
+                        sed -i '' "s/${IMAGE_TAG}/${BUILD_NUMBER}/g" deployment/deployment.yml
                         git add deployment/deployment.yml
                         git commit -m "Update deployment image to version ${BUILD_NUMBER}"
                         git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}.git HEAD:main
 
                         ''' 
-                 } */
+                 }
             }
         }
     }
