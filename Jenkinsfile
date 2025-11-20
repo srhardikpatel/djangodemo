@@ -34,8 +34,8 @@ pipeline {
             
             steps {
                 sh '''
-                  cat test | awk '{print \$2} deployment/deployment.yml'
                   
+                  grep "djangodemo:" deployment/deployment.yml
                   '''
 /*                
                  withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
