@@ -34,7 +34,7 @@ pipeline {
             
             steps {
                   
-                  IMAGE_TAG=${sh grep "djangodemo:" deployment/deployment.yml | awk '{print \$2}' | cut -d ":" -f 2}
+                  IMAGE_TAG=${sh 'grep "djangodemo:" deployment/deployment.yml | awk '{print \$2}' | cut -d ":" -f 2'}
                   sh echo ${IMAGE_TAG}
 /*                
                  withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
