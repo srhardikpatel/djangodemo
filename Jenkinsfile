@@ -34,7 +34,7 @@ pipeline {
             
             steps {
                   sh '''
-                  IMAGE_TAG='grep "djangodemo:" deployment/deployment.yml'
+                  IMAGE_TAG=${'grep "djangodemo:" deployment/deployment.yml'}
                   echo ${IMAGE_TAG}
                      '''
                               // | awk '{print \$2}' | cut -d ":" -f 2'
