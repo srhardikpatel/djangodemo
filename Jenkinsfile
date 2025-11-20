@@ -33,16 +33,15 @@ pipeline {
             }
             
             steps {
-                script {
-                    sh awk '/djangodemo:/{print $2} deployment/deployment.yml'
-                }
+                sh awk '/djangodemo:/{print $2} deployment/deployment.yml'
+/*                
                  withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
                      sh '''
                         git config user.email "srhardikpatel@gmail.com"
                         git config user.name "srhardikpatel"
                         
                         
-/*                        sed -i '' "s/replaceImageTag/${BUILD_NUMBER}/g" deployment/deployment.yml
+                        sed -i '' "s/replaceImageTag/${BUILD_NUMBER}/g" deployment/deployment.yml
                         git add deployment/deployment.yml
                         git commit -m "Update deployment image to version ${BUILD_NUMBER}"
                         git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}.git HEAD:main
