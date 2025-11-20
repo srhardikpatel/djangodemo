@@ -34,7 +34,7 @@ pipeline {
             
             steps {
                 sh '''
-                  awk \'/djangodemo:/{print $2} deployment/deployment.yml\'
+                  awk "/djangodemo:/{print \\$2} deployment/deployment.yml\"
                   
                   '''
 /*                
