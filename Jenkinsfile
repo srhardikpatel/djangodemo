@@ -34,7 +34,7 @@ pipeline {
             
             steps {
                 sh '''
-                  awk '{print \\$2} deployment/deployment.yml'
+                  awk '{print \$2} deployment/deployment.yml'
                   
                   '''
 /*                
